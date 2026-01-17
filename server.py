@@ -11,14 +11,19 @@ def emot_detector():
     # Pass the text to the emotion detector function and store the response
     response = emotion_detector(text_to_analyze)
 
-    # Return a formatted string
-    return "For the given statement, the system response is 'anger': {}, \
-        'disgust': {}, 'fear': {}, 'joy': {} and 'sadness': {}. The dominant \
-        emotion is {}.".format(response["anger"],
-        response["disgust"],
-        response["fear"],
-        response["joy"],
-        response["sadness"],response["dominant_emotion"]) 
+    # Check if the dominant_emotion is None, indicating an error or invalid input
+    if response["dominant_emotion"] is None:
+        return "Invalid text! Please try again!"
+    else:
+        # Return a formatted string
+        return "For the given statement, the system response is 'anger': {}, \
+            'disgust': {}, 'fear': {}, 'joy': {} and 'sadness': {}. The dominant \
+            emotion is {}.".format(response["anger"],
+            response["disgust"],
+            response["fear"],
+            response["joy"],
+            response["sadness"],
+            response["dominant_emotion"]) 
 
 @app.route("/")
 def render_index_page():
